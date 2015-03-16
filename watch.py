@@ -3,6 +3,7 @@
 __author__ = 'Will Brennan'
 
 # built-in libarys
+import os
 import logging
 import argparse
 import datetime
@@ -31,7 +32,7 @@ def get_args(default=None, args_string=''):
     else:
         args = parser.parse_args()
     if not args.name:
-        args.name = args.game+datetime.datetime.today().strftime("%d-%m-%Y")
+        args.name = args.game+'-'+datetime.datetime.today().strftime("%d-%m-%Y")
     return args
 
 

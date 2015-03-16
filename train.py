@@ -9,6 +9,8 @@ import argparse
 import datetime
 # Standard libaries
 # Custom libaries
+import DeepQ
+import tools
 
 logger = logging.getLogger('main')
 
@@ -26,7 +28,7 @@ def get_args(default=None, args_string=''):
     parser.add_argument('-g', '--game', dest='game', default=default.get('game', 'pong'), type=str, help="Name of game in ROM directory")
     parser.add_argument('-e', '--epochs', dest='epochs', default=default.get('epochs', 200), type=int, help="Number of Learning Epochs")
     parser.add_argument('-i', '--iter', dest='iter', default=default.get('iter', 500), type=int, help="Number of Iterations per Epoch")
-    parser.add_argument('-d', '--display', dest='display', default=default.get('display', True), type=bool, help="Display Game while learning and testing")
+    parser.add_argument('-d', '--display', dest='display', action="store_false", help="Display Game while learning and testing")
     parser.add_argument('-n', '--name', dest='name', default=default.get('name', ''), type=str, help='Name for IO')
     if args_string:
         args_string = args_string.split(' ')
@@ -34,7 +36,7 @@ def get_args(default=None, args_string=''):
     else:
         args = parser.parse_args()
     if not args.name:
-        args.name = args.game+datetime.datetime.today().strftime("%d_%m_%Y")
+        args.name = args.game+'-'+datetime.datetime.today().strftime("%d-%m-%Y")
     return args
 
 
@@ -47,4 +49,6 @@ if __name__ == '__main__':
         i.setLevel(logging.INFO)
         i.setFormatter(formatter)
         logger.addHandler(i)
+    QLearner = DeepQ.DeepQLearner(args=args)
+    logger.info('complete')
 
