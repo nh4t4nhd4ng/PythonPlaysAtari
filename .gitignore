@@ -1,6 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.pyc
+
+# Linux Temporary Files
+*~
+
+# PyCharm Folders
+.idea/
 
 # C extensions
 *.so
