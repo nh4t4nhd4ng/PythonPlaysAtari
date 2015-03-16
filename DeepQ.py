@@ -23,7 +23,6 @@ class DeepQLearner(object):
         logger.debug('Generating training domain')
         self.path = ''.join(map(lambda i: i+'/', os.path.abspath(__file__).split('/'))[:-1])[:-1]
         self.path = '{0}/data/{1}/'.format(self.path, args.name)
-        print self.path
         self.layers = None
         logger.debug('initialisation complete')
 
