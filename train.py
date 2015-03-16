@@ -3,11 +3,13 @@
 __author__ = 'Will Brennan'
 
 # built-in libarys
+import os
 import sys
 import logging
 import argparse
 import datetime
 # Standard libaries
+import numpy
 # Custom libaries
 import DeepQ
 import tools
@@ -36,14 +38,17 @@ def get_args(default=None, args_string=''):
     else:
         args = parser.parse_args()
     if not args.name:
-        args.name = args.game+'-'+datetime.datetime.today().strftime("%d-%m-%Y")
+        args.name = '{0}-{1}'.format(args.game, datetime.datetime.today().strftime("%d-%m-%Y-%H-%M"))
     return args
 
 
 if __name__ == '__main__':
     args = get_args()
     logger.setLevel(logging.INFO)
-    fh, ch = logging.FileHandler('train_{0}.log'.format(args.name)), logging.StreamHandler()
+    base = os.path.dirname(os.path.realpath(__file__))
+    os.mkdir('{0}/data/{1}'.format(base, args.name))
+    path = '{0}/data/{1}/train.log'.format(base, args.name)
+    fh, ch = logging.FileHandler(path), logging.StreamHandler()
     formatter = logging.Formatter('%(asctime)s - %(funcName)s - %(levelname)s - %(message)s')
     for i in [fh, ch]:
         i.setLevel(logging.INFO)
