@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Will Brennan'
 
-# built-in libarys
-import logging
-# Standard libaries
-# Custom libaries
+# built-in modules
+# Standard modules
+# Custom modules
 
-logger = logging.getLogger('main')
+import plots
+import scripts
+import ale_wrapper
